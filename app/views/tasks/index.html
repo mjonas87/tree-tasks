@@ -1,0 +1,32 @@
+<div id="task" v-if="selectedTask != null">
+  FUCK
+</div>
+
+<div id="tasks" v-else>
+  <h1>Tasks</h1>
+  <table class="table">
+    <tbody>
+      <tr is="task-row" v-for="task in tasks" :task="task"></tr>
+    </tbody>
+  </table>
+</div>
+
+<script id="task-row" type="text/x-template">
+  <tr>
+    <td>
+      <!-- Show input when in edit mode -->
+      <div v-if="editMode">
+        <input type="text" v-model="task.name"><br>
+        <span style="color:red">{{ errors.name }}</span>
+      </div>
+      <div v-else @click="viewTask(task)">{{ task.name }}</div>
+    </td>
+    <td>
+      <span class="badge badge-primary">{{ task.sub_tasks ? task.sub_tasks.length : 0 }}</span>
+    </td>
+    <td>
+      <button v-if="editMode" @click="updateTask">Save</button>
+      <button v-else @click="editMode = true">Edit</button>
+    </td>
+  </tr>
+</script>

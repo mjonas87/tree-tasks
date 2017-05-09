@@ -1,9 +1,9 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.all
+    @tasks = Task.where(parent_task: nil)
     respond_to do |format|
       format.html
-      format.json { render :json => @tasks }
+      format.json { render :json => @tasks.to_json(include: :sub_tasks) }
     end
   end
 
@@ -43,6 +43,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :email, :manager)
+    params.require(:task).permit(:name, :description)
   end
 end

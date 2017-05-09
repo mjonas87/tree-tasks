@@ -5,10 +5,10 @@ window.onload = function () {
     el: '#tasks',
     data: {
       tasks: [],
+      selectedTask: null,
       task: {
-        name: '',
-        email: '',
-        manager: false
+        name: 'conquer the world...',
+        description: ''
       },
       errors: {}
     },
@@ -23,24 +23,15 @@ window.onload = function () {
       });
     },
     methods: {
-      hireTask: function () {
-        var that = this;
-        $.ajax({
-          method: 'POST',
-          data: {
-            task: that.task,
-          },
-          url: '/tasks.json',
-          success: function(res) {
-            that.errors = {}
-            that.tasks.push(res);
-          },
-          error: function(res) {
-            that.errors = res.responseJSON.errors
-          }
-        })
-      },
+      // viewTask: function() {
+      //   return
+      // }
     }
+  });
+
+  tasks.$on('viewTask', function (task) {
+    debugger;
+    this.selectedTask = task
   });
 
   Vue.component('task-row', {
@@ -58,10 +49,10 @@ window.onload = function () {
       // toggle the manager status which also updates the task in the database
       toggleManagerStatus: function () {
         this.task.manager = !this.task.manager
-        this.updateEmployee()
+        this.updateTask()
       },
       // ajax call for updating an task
-      updateEmployee: function () {
+      updateTask: function () {
         var that = this;
         $.ajax({
           method: 'PUT',
@@ -77,18 +68,11 @@ window.onload = function () {
           error: function(res) {
             that.errors = res.responseJSON.errors
           }
-        })
+        });
       },
-      fireTask: function () {
-        var that = this;
-        $.ajax({
-          method: 'DELETE',
-          url: '/tasks/' + that.task.id + '.json',
-          success: function(res) {
-            that.$remove()
-          }
-        })
+      viewTask: function(task) {
+        tasks.$emit('viewTask', task);
       }
     }
-})
+  })
 }
