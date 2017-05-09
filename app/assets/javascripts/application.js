@@ -14,4 +14,3 @@
 //= require bootstrap
 //= require jquery_ujs
 //= require vue
-//= require_tree .

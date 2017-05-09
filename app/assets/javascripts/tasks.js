@@ -13,25 +13,13 @@ window.onload = function () {
       errors: {}
     },
     mounted: function() {
-      var that;
-      that = this;
       $.ajax({
         url: '/tasks.json',
         success: function(res) {
-          that.tasks = res;
-        }
+          this.tasks = res;
+        }.bind(this)
       });
-    },
-    methods: {
-      // viewTask: function() {
-      //   return
-      // }
     }
-  });
-
-  tasks.$on('viewTask', function (task) {
-    debugger;
-    this.selectedTask = task
   });
 
   Vue.component('task-row', {
@@ -46,32 +34,22 @@ window.onload = function () {
       }
     },
     methods: {
-      // toggle the manager status which also updates the task in the database
-      toggleManagerStatus: function () {
-        this.task.manager = !this.task.manager
-        this.updateTask()
-      },
-      // ajax call for updating an task
       updateTask: function () {
-        var that = this;
         $.ajax({
           method: 'PUT',
           data: {
-            task: that.task,
+            task: this.task,
           },
-          url: '/tasks/' + that.task.id + '.json',
+          url: '/tasks/' + this.task.id + '.json',
           success: function(res) {
-            that.errors = {}
-            that.task = res
-            that.editMode = false
-          },
+            this.errors = {}
+            this.task = res
+            this.editMode = false
+          }.bind(this),
           error: function(res) {
-            that.errors = res.responseJSON.errors
-          }
+            this.errors = res.responseJSON.errors
+          }.bind(this)
         });
-      },
-      viewTask: function(task) {
-        tasks.$emit('viewTask', task);
       }
     }
   })

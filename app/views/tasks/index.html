@@ -1,5 +1,5 @@
 <div id="task" v-if="selectedTask != null">
-  FUCK
+
 </div>
 
 <div id="tasks" v-else>
@@ -19,7 +19,7 @@
         <input type="text" v-model="task.name"><br>
         <span style="color:red">{{ errors.name }}</span>
       </div>
-      <div v-else @click="viewTask(task)">{{ task.name }}</div>
+      <a v-else :href="task.url">{{ task.name }}</a>
     </td>
     <td>
       <span class="badge badge-primary">{{ task.sub_tasks ? task.sub_tasks.length : 0 }}</span>
@@ -30,3 +30,5 @@
     </td>
   </tr>
 </script>
+
+<script type="text/javascript" src="assets/tasks.js"></script>

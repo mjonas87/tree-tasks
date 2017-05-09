@@ -17,7 +17,7 @@
         <input type="text" v-model="task.name"><br>
         <span style="color:red">{{ errors.name }}</span>
       </div>
-      <div v-else @click="viewTask">{{ task.name }}</div>
+      <a v-else href="/tasks/#{{task.id}}">{{ task.name }}</div>
     </td>
     <td>
       <span class="badge badge-primary">{{ task.sub_tasks ? task.sub_tasks.length : 0 }}</span>
@@ -28,3 +28,5 @@
     </td>
   </tr>
 </script>
+
+<script type="text/javascript" src="assets/task.js"></script>
