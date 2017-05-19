@@ -11,7 +11,7 @@ module.exports = merge(baseWebpackConfig, {
     loaders: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })
   },
   output: {
-    publicPath: '//localhost:' + devServerPort + '/webpack/'
+    publicPath: '//localhost:' + 2222 + '/webpack/'
   },
   // eval-source-map is faster for development
   devtool: '#eval-source-map',
