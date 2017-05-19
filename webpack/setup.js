@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import hello from 'components/hello'
 /*
 *  Import your components here.
 *  Your components directory is aliased as 'components'
@@ -16,7 +17,7 @@ export default function (template) {
     },
     // Then include them here:
     components: {
-      // MyComponent
+      hello
     }
   })
 }
