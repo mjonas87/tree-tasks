@@ -12,8 +12,7 @@
   "scripts": {
     "dev": "./node_modules/.bin/webpack-dev-server --hot --inline --config config/vueport/webpack.dev.conf --host 0.0.0.0",
     "compile": "node config/vueport/build",
-    "heroku-prebuild": "npm install",
-    "heroku-postbuild": "node config/vueport/build"
+    "heroku-prebuild": "npm install && npm run compile"
   },
   "dependencies": {
     "babel-core": "^6.17.0",
