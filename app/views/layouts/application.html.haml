@@ -9,6 +9,5 @@
   %body
     %p.notice= notice
     %p.alert= alert
-    -# = vueport yield
-    = yield
+    = vueport yield
     = javascript_include_tag *webpack_asset_paths("application", extension: 'js')
